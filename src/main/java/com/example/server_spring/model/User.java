@@ -1,8 +1,6 @@
 package com.example.server_spring.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 
@@ -11,6 +9,15 @@ import lombok.Data;
 @Table(name = "users")
 public class User {
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "user_sequence", allocationSize = 1)
+    private Long id;
     private String name;
+    private String password;
+
+    public User(){}
+
+    public String getUserName(){
+        return name;
+    }
 }
